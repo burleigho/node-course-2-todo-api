@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const {ObjectID} = require('mongodb');
 const _ = require('lodash')
+const {authenticate} = require('./middleware/authenticate');
 
 var {mongoose} = require('./db/mongoose');
 var {Todo} = require('./models/todo');
@@ -13,8 +14,6 @@ var app = express();
 const port = process.env.PORT;
 
 app.use(bodyParser.json());
-
-
 
 app.post('/todos', (req, res) => {
   var todo = new Todo({
@@ -109,6 +108,10 @@ app.patch('/todos/:id', (req, res) => {
   }).catch((e) => {
     res.status(400).send();
   })
+});
+
+app.get('/users/me', authenticate, (req, res) => {
+  res.send(req.user);
 });
 
 app.listen(port, () => {
