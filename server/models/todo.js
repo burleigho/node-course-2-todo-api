@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
-const Todo = mongoose.model('Todo', {
+var Todo = mongoose.model('Todo', {
   text: {
     type: String,
     required: true,
@@ -9,7 +9,6 @@ const Todo = mongoose.model('Todo', {
   },
   completed: {
     type: Boolean,
-    require: true,
     default: false
   },
   completedAt: {

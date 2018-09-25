@@ -1,34 +1,30 @@
-//const MongoClient = require('mongodb').MongoClient;
+// const MongoClient = require('mongodb').MongoClient;
 const {MongoClient, ObjectID} = require('mongodb');
 
-MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
+MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
   if (err) {
-    return console.log('Unable to connect to MongoDB');
+    return console.log('Unable to connect to MongoDB server');
   }
-  console.log('Connected to MongoDB');
-  const db = client.db('TodoApp');
+  console.log('Connected to MongoDB server');
 
   // db.collection('Todos').find({
-  //   _id: new ObjectID('5b7c077d883e3819c4f004ad')
+  //   _id: new ObjectID('57bb36afb3b6a3801d8c479d')
   // }).toArray().then((docs) => {
   //   console.log('Todos');
   //   console.log(JSON.stringify(docs, undefined, 2));
   // }, (err) => {
-  //   console.log('unable to fetch documents', err);
+  //   console.log('Unable to fetch todos', err);
   // });
 
   // db.collection('Todos').find().count().then((count) => {
   //   console.log(`Todos count: ${count}`);
   // }, (err) => {
-  //   console.log('unable to fetch documents', err);
+  //   console.log('Unable to fetch todos', err);
   // });
 
-  db.collection('Users').find({name: 'Oliver'}).toArray().then((name) => {
-    console.log('Users');
-    console.log(JSON.stringify(name, undefined, 2));
-  }, (err) => {
-    console.log('unable to get docs', err);
+  db.collection('Users').find({name: 'Andrew'}).toArray().then((docs) => {
+    console.log(JSON.stringify(docs, undefined, 2));
   });
 
-  //client.close();
+  // db.close();
 });
